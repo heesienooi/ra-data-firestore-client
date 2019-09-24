@@ -23,7 +23,7 @@ const addUploadFeature = requestHandler => (type, resource, params) => {
         .then(base64Pictures =>
           base64Pictures.map(picture64 => ({
             src: picture64,
-            title: `${params.data.title}`
+            title: `${params.data.title}`,
           }))
         )
         .then(transformedNewPictures =>
@@ -31,8 +31,8 @@ const addUploadFeature = requestHandler => (type, resource, params) => {
             ...params,
             data: {
               ...params.data,
-              image: [...transformedNewPictures, ...formerPictures]
-            }
+              image: [...transformedNewPictures, ...formerPictures],
+            },
           })
         );
     }
@@ -47,7 +47,7 @@ const getImageSize = file => {
     img.onload = function() {
       resolve({
         width: this.width,
-        height: this.height
+        height: this.height,
       });
     };
     img.src = file.src;
@@ -55,7 +55,8 @@ const getImageSize = file => {
 };
 
 const upload = async (fieldName, submitedData, id, resourceName, resourcePath) => {
-  const file = submitedData[fieldName] && submitedData[fieldName][0];
+  let file = submitedData[fieldName];
+  file = Array.isArray(file) ? file[0] : file;
   const rawFile = file.rawFile;
 
   const result = {};
@@ -268,5 +269,5 @@ export default {
   getMany,
   getManyReference,
   addUploadFeature,
-  convertFileToBase64
+  convertFileToBase64,
 };
