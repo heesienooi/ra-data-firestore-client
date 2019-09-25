@@ -37,7 +37,8 @@
   },
   "peerDependencies": {
     "react": "16.5.0",
-    "react-dom": "16.5.0"
+    "react-dom": "16.5.0",
+    "firebase": "^5.5.5"
   },
   "devDependencies": {
     "autoprefixer": "^9.1.5",
@@ -91,7 +92,6 @@
     "whatwg-fetch": "^3.0.0"
   },
   "dependencies": {
-    "firebase": "^5.5.5",
     "prop-types": "^15.6.0",
     "react": "16.5.0",
     "react-admin": "^2.3.2",
