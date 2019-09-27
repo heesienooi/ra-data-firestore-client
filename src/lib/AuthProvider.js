@@ -1,5 +1,5 @@
 /* globals localStorage */
-import { AUTH_LOGIN, AUTH_LOGOUT, AUTH_CHECK } from 'react-admin';
+import { AUTH_LOGIN, AUTH_LOGOUT, AUTH_CHECK, AUTH_GET_PERMISSIONS } from 'react-admin';
 import firebase from 'firebase/app';
 import 'firebase/firestore';
 import 'firebase/auth';
@@ -30,7 +30,7 @@ const baseConfig = {
       localStorage.removeItem(config.localStorageTokenName);
       throw new Error('sign_in_error');
     }
-  }
+  },
 };
 
 export default (config = {}) => {
@@ -59,6 +59,18 @@ export default (config = {}) => {
       }
 
       return true;
+    }
+
+    if (type === AUTH_GET_PERMISSIONS) {
+      console.log('AUTH_GET_PERMISSIONS');
+      await firebaseLoaded();
+
+      if (!firebase.auth().currentUser) {
+        throw new Error('sign_in_error');
+      }
+
+      const token = await firebase.auth().currentUser.getIdTokenResult();
+      return token.claims;
     }
 
     if (type === AUTH_LOGIN) {

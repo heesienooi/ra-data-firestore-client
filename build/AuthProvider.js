@@ -105,7 +105,7 @@ exports['default'] = function () {
 
   return function () {
     var _ref2 = (0, _asyncToGenerator3['default'])( /*#__PURE__*/_regenerator2['default'].mark(function _callee2(type, params) {
-      var username, password, alreadySignedIn, auth;
+      var token, username, password, alreadySignedIn, auth;
       return _regenerator2['default'].wrap(function _callee2$(_context2) {
         while (1) {
           switch (_context2.prev = _context2.next) {
@@ -148,8 +148,34 @@ exports['default'] = function () {
               return _context2.abrupt('return', true);
 
             case 12:
+              if (!(type === _reactAdmin.AUTH_GET_PERMISSIONS)) {
+                _context2.next = 22;
+                break;
+              }
+
+              console.log('AUTH_GET_PERMISSIONS');
+              _context2.next = 16;
+              return firebaseLoaded();
+
+            case 16:
+              if (_app2['default'].auth().currentUser) {
+                _context2.next = 18;
+                break;
+              }
+
+              throw new Error('sign_in_error');
+
+            case 18:
+              _context2.next = 20;
+              return _app2['default'].auth().currentUser.getIdTokenResult();
+
+            case 20:
+              token = _context2.sent;
+              return _context2.abrupt('return', token.claims);
+
+            case 22:
               if (!(type === _reactAdmin.AUTH_LOGIN)) {
-                _context2.next = 20;
+                _context2.next = 30;
                 break;
               }
 
@@ -157,23 +183,23 @@ exports['default'] = function () {
               auth = _app2['default'].auth().currentUser;
 
               if (!(!auth || !alreadySignedIn)) {
-                _context2.next = 19;
+                _context2.next = 29;
                 break;
               }
 
-              _context2.next = 18;
+              _context2.next = 28;
               return _app2['default'].auth().signInWithEmailAndPassword(username, password);
 
-            case 18:
+            case 28:
               auth = _context2.sent;
 
-            case 19:
+            case 29:
               return _context2.abrupt('return', config.handleAuthStateChange(auth, config));
 
-            case 20:
+            case 30:
               return _context2.abrupt('return', false);
 
-            case 21:
+            case 31:
             case 'end':
               return _context2.stop();
           }
