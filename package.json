@@ -36,9 +36,9 @@
     "url": "https://github.com/rafalzawadzki/ra-data-firestore-client.git"
   },
   "peerDependencies": {
-    "react": "16.5.0",
-    "react-dom": "16.5.0",
+    "react": "^16.5.0",
     "react-admin": "^2.3.2",
+    "react-dom": "^16.5.0",
     "firebase": "^5.5.5"
   },
   "devDependencies": {
@@ -94,7 +94,7 @@
   },
   "dependencies": {
     "prop-types": "^15.6.0",
-    "react": "16.5.0",
+    "react": "^16.5.0",
     "react-admin": "^2.3.2",
     "react-dom": "^16.5.0",
     "sort-by": "^1.2.0"
