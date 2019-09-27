@@ -129,33 +129,32 @@ export default (function () {
 
             case 12:
               if (!(type === AUTH_GET_PERMISSIONS)) {
-                _context2.next = 22;
+                _context2.next = 21;
                 break;
               }
 
-              console.log('AUTH_GET_PERMISSIONS');
-              _context2.next = 16;
+              _context2.next = 15;
               return firebaseLoaded();
 
-            case 16:
+            case 15:
               if (firebase.auth().currentUser) {
-                _context2.next = 18;
+                _context2.next = 17;
                 break;
               }
 
               throw new Error('sign_in_error');
 
-            case 18:
-              _context2.next = 20;
+            case 17:
+              _context2.next = 19;
               return firebase.auth().currentUser.getIdTokenResult();
 
-            case 20:
+            case 19:
               token = _context2.sent;
               return _context2.abrupt('return', token.claims);
 
-            case 22:
+            case 21:
               if (!(type === AUTH_LOGIN)) {
-                _context2.next = 30;
+                _context2.next = 29;
                 break;
               }
 
@@ -163,23 +162,23 @@ export default (function () {
               auth = firebase.auth().currentUser;
 
               if (!(!auth || !alreadySignedIn)) {
-                _context2.next = 29;
+                _context2.next = 28;
                 break;
               }
 
-              _context2.next = 28;
+              _context2.next = 27;
               return firebase.auth().signInWithEmailAndPassword(username, password);
 
-            case 28:
+            case 27:
               auth = _context2.sent;
 
-            case 29:
+            case 28:
               return _context2.abrupt('return', config.handleAuthStateChange(auth, config));
 
-            case 30:
+            case 29:
               return _context2.abrupt('return', false);
 
-            case 31:
+            case 30:
             case 'end':
               return _context2.stop();
           }

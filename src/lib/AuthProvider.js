@@ -62,7 +62,6 @@ export default (config = {}) => {
     }
 
     if (type === AUTH_GET_PERMISSIONS) {
-      console.log('AUTH_GET_PERMISSIONS');
       await firebaseLoaded();
 
       if (!firebase.auth().currentUser) {
